@@ -29,17 +29,15 @@ class MainActivity : AppCompatActivity() {
 
     fun dropIn(view:View) {
         val counter: ImageView = view as ImageView
-        var tappedCounter: Int = counter.tag.toString().toInt()
+        val tappedCounter: Int = counter.tag.toString().toInt()
         if (gameState[tappedCounter] == 0 && gameIsActive) {
             gameState[tappedCounter] = activePlayer
             counter.translationY = -1000f
             activePlayer = if (activePlayer == 1) {
                 counter.setImageResource(R.drawable.yellow)
-//                counter.setBackgroundResource(R.drawable.yellow)
                 2
             } else {
                 counter.setImageResource(R.drawable.red)
-//                counter.setBackgroundResource(R.drawable.red)
                 1
             }
             counter.animate().translationYBy(1000f).duration = 300
@@ -48,10 +46,10 @@ class MainActivity : AppCompatActivity() {
                     gameState[winningPosition[1]] == gameState[winningPosition[2]]
                     && gameState[winningPosition[0]] != 0
                 ) {
-                    var winnerNumber: Int = gameState[winningPosition[0]]
+                    val winnerNumber: Int = gameState[winningPosition[0]]
                     // Someone has won, or draw
                     gameIsActive = false
-                    var winner: String = if (winnerNumber == 1) "Yellow" else "Red"
+                    val winner: String = if (winnerNumber == 1) "Yellow" else "Red"
                     val endGameTextView: TextView = findViewById(R.id.endGameTextView)
                     endGameTextView.text = "$winner has won!"
                     val layout: LinearLayout = findViewById(R.id.playAgainLayout)
@@ -61,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                         layout.animate().translationYBy(1000f).duration = 300
                     }
                 } else {
-                    var gameIsOver: Boolean = true
+                    var gameIsOver = true
                     for (counterState in gameState) {
                         if (counterState == 0) gameIsOver = false
                     }
